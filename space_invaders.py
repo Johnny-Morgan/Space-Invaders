@@ -28,9 +28,17 @@ player.speed(0)
 player.setposition(0, -250)
 player.setheading(90)
 
-# Player movement
+
 playerspeed = 15
 
+# Create enemy
+enemy = turtle.Turtle()
+enemy.color("#f00")
+enemy.shape("circle")
+enemy.penup()
+enemy.speed(0)
+enemy.setposition(-200, 250)
+enemyspeed = 2
 # Move player left & right
 def move_left():
     x = player.xcor()
@@ -45,11 +53,30 @@ def move_right():
     if x > 280:
         x = 280
     player.setx(x)
+
 # Create keyboard bindings
 turtle.listen()
 turtle.onkeypress(move_left, "Left")
 turtle.onkeypress(move_right, "Right")
 
+# Main game loop
+while True:
+
+    # Move the enemy
+    x = enemy.xcor()
+    x += enemyspeed
+    enemy.setx(x)
+    y = enemy.ycor()
+    # Move enemy back and down
+    if x > 280:
+        enemyspeed *= -1
+        y -= 40
+        enemy.sety(y)
+
+    if x < -280:
+        enemyspeed *= -1
+        y -= 40
+        enemy.sety(y)
 
 
 
