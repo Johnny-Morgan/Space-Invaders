@@ -7,7 +7,11 @@ import random
 wn = turtle.Screen()
 wn.bgcolor("#000")
 wn.title("Space Invaders")
+wn.bgpic("space_invaders_background.gif")
 
+# Register the shapes
+turtle.register_shape("invader.gif")
+turtle.register_shape("player.gif")
 # Draw border
 border_pen = turtle.Turtle() # Turtle object
 border_pen.speed(0) # 0 is fastest speed we can go
@@ -36,7 +40,7 @@ score_pen.hideturtle()
 # Create the player Turtle
 player = turtle.Turtle()
 player.color("#00f")
-player.shape("triangle")
+player.shape("player.gif")
 player.penup()
 player.speed(0)
 player.setposition(0, -250)
@@ -57,7 +61,7 @@ for i in range(number_of_enemies):
     enemies.append(turtle.Turtle())
 for enemy in enemies:
     enemy.color("#f00")
-    enemy.shape("circle")
+    enemy.shape("invader.gif")
     enemy.penup()
     enemy.speed(0)
     x = random.randint(-200, 200)
