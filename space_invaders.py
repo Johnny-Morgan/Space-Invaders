@@ -2,6 +2,7 @@
 import turtle
 import math
 import random
+import winsound
 
 # Set up the screen
 wn = turtle.Screen()
@@ -106,6 +107,7 @@ def fire_bullet():
     # Declare bulletstate as a global variables
     global bulletstate
     if bulletstate == "ready":
+        winsound.PlaySound("laser", winsound.SND_ASYNC)
         bulletstate = "fire"
         # Move the bullet to just above the player
         bullet.setposition(player.xcor(), player.ycor() + 10)
@@ -148,6 +150,7 @@ while True:
 
         # Check for a collision between bullet and enemy
         if isCollision(bullet, enemy):
+            winsound.PlaySound("explosion", winsound.SND_ASYNC)
             # Reset the bullet
             bullet.hideturtle()
             bulletstate = "ready"
@@ -165,6 +168,7 @@ while True:
 
         # Check for a collision between player and enemy
         if isCollision(player, enemy):
+            winsound.PlaySound("explosion", winsound.SND_ASYNC)
             player.hideturtle()
             enemy.hideturtle()
             print("Game Over")
