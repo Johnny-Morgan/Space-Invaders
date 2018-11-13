@@ -167,12 +167,14 @@ while True:
 
 
         # Check for a collision between player and enemy
-        if isCollision(player, enemy):
+        if isCollision(player, enemy) or enemy.ycor() < -250:
+            
             winsound.PlaySound("explosion", winsound.SND_ASYNC)
             player.hideturtle()
             enemy.hideturtle()
             print("Game Over")
             break
+
 
     # Move the bullet
     if bulletstate == "fire":
