@@ -38,6 +38,18 @@ score_pen.setposition(-290, 280)
 scorestring = "Score: %s" % score
 score_pen.write(scorestring, False, align="left", font=("Arial", 13, "normal"))
 score_pen.hideturtle()
+
+# Game over pen
+game_over_pen = turtle.Turtle()
+game_over_pen.speed(0)
+game_over_pen.color("#fff")
+game_over_pen.penup()
+game_over_pen.setposition(-25, 0)
+game_over_string = ""
+game_over_pen.write(game_over_string, False, align="center", font=("Arial", 13, "normal"))
+game_over_pen.hideturtle()
+
+
 # Create the player Turtle
 player = turtle.Turtle()
 player.color("#00f")
@@ -130,6 +142,7 @@ while True:
         x = enemy.xcor()
         x += enemyspeed
         enemy.setx(x)
+        broke = False
 
         # Move enemy back and down
         if x > 280:
@@ -168,11 +181,13 @@ while True:
 
         # Check for a collision between player and enemy
         if isCollision(player, enemy) or enemy.ycor() < -250:
-            
+            broke = True
             winsound.PlaySound("explosion", winsound.SND_ASYNC)
             player.hideturtle()
             enemy.hideturtle()
             print("Game Over")
+            game_over_string = "Game Over"
+            game_over_pen.write(game_over_string, False, align="left", font=("Arial", 13, "normal"))
             break
 
 
@@ -188,7 +203,8 @@ while True:
         bulletstate = "ready"
 
 
-
+    if broke:
+        break
 
 
 wn.mainloop()
